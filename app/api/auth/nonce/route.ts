@@ -27,13 +27,19 @@ export async function POST(request: Request) {
     await initializeDatabase();
 
     const nonce = randomBytes(32).toString("hex");
+    const issuedAt = new Date().toISOString();
     const expiresAt = new Date(
       Date.now() + 5 * 60 * 1000
     ).toISOString();
 
+    const requestUrl = new URL(request.url);
+
     const message = buildAuthMessage({
+      domain: requestUrl.host,
+      uri: requestUrl.origin,
       wallet,
       nonce,
+      issuedAt,
       expiresAt,
     });
 
