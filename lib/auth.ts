@@ -1,3 +1,5 @@
+// @vitest-environment node
+
 import nacl from "tweetnacl";
 
 type BuildAuthMessageInput = {
