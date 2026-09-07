@@ -32,6 +32,18 @@ const catalogueResponse = {
         small: "https://example.com/pikachu.png",
         large: "https://example.com/pikachu-large.png",
       },
+      tcgplayer: {
+        url: "https://example.com/pikachu",
+        updatedAt: "2026-09-07",
+        prices: {
+          normal: {
+            market: 12.34,
+            low: 10.5,
+            mid: 13,
+            high: 18,
+          },
+        },
+      },
     },
   ],
   page: 1,
@@ -61,7 +73,7 @@ describe("CMC CardDex", () => {
     vi.unstubAllGlobals();
   });
 
-  it("loads verified cards from the server catalogue", async () => {
+  it("loads cards with attributed market pricing", async () => {
     render(<Page />);
 
     expect(
@@ -78,6 +90,18 @@ describe("CMC CardDex", () => {
     expect(screen.getByText("#25")).toBeTruthy();
     expect(
       screen.getByText("Illustration Rare")
+    ).toBeTruthy();
+
+    expect(
+      screen.getByText("$12.34")
+    ).toBeTruthy();
+
+    expect(
+      screen.getByText("TCGplayer market")
+    ).toBeTruthy();
+
+    expect(
+      screen.getByText("updated 2026-09-07")
     ).toBeTruthy();
   });
 });
