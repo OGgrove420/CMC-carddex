@@ -49,9 +49,14 @@ export function verifyAuthSignature({
     return false;
   }
 
-  return nacl.sign.detached.verify(
-    new TextEncoder().encode(message),
-    Uint8Array.from(signature),
-    publicKey
+  const messageBytes = Uint8Array.from(
+    new TextEncoder().encode(message)
   );
-}
+  const signatureBytes = Uint8Array.from(signature);
+  const publicKeyBytes = Uint8Array.from(publicKey);
+
+  return nacl.sign.detached.verify(
+    messageBytes,
+    signatureBytes,
+    publicKeyBytes
+  );
