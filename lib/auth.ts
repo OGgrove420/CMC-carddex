@@ -1,31 +1,37 @@
 import nacl from "tweetnacl";
 
 type BuildAuthMessageInput = {
+  domain: string;
+  uri: string;
   wallet: string;
   nonce: string;
+  issuedAt: string;
   expiresAt: string;
 };
 
-type VerifyAuthSignatureInput = {
-  message: string;
-  signature: number[];
-  publicKey: Uint8Array;
-};
-
 export function buildAuthMessage({
+  domain,
+  uri,
   wallet,
   nonce,
+  issuedAt,
   expiresAt,
 }: BuildAuthMessageInput) {
   return [
-    "CMC CardDex wallet authentication",
+    `${domain} wants you to sign in with your Solana account:`,
+    wallet,
     "",
-    `wallet: ${wallet}`,
-    `nonce: ${nonce}`,
-    `expires at: ${expiresAt}`,
+    "Sign in to CMC CardDex.",
     "",
-    "signing proves wallet ownership.",
-    "this does not authorize a transaction or spending.",
+    `URI: ${uri}`,
+    "Version: 1",
+    "Chain ID: solana:devnet",
+    `Nonce: ${nonce}`,
+    `Issued At: ${issuedAt}`,
+    `Expiration Time: ${expiresAt}`,
+    "",
+    "This request proves wallet ownership.",
+    "It does not authorize a transaction or spending.",
   ].join("\n");
 }
 
