@@ -1,5 +1,3 @@
-// @vitest-environment node
-
 import nacl from "tweetnacl";
 
 type BuildAuthMessageInput = {
@@ -54,10 +52,10 @@ export function verifyAuthSignature({
   );
   const signatureBytes = Uint8Array.from(signature);
   const publicKeyBytes = Uint8Array.from(publicKey);
-  }
 
   return nacl.sign.detached.verify(
     messageBytes,
     signatureBytes,
     publicKeyBytes
   );
+}
