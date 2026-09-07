@@ -18,9 +18,14 @@ describe("CardDex wallet authentication", () => {
       expiresAt: "2026-09-07T12:00:00.000Z",
     });
 
+    const messageBytes = Uint8Array.from(
+      new TextEncoder().encode(message)
+    );
+    const secretKey = Uint8Array.from(keypair.secretKey);
+
     const signature = nacl.sign.detached(
-      new TextEncoder().encode(message),
-      keypair.secretKey
+      messageBytes,
+      secretKey
     );
 
     expect(
