@@ -29,7 +29,7 @@ export default function Providers({
     () => [
       new PhantomWalletAdapter(),
       new SolflareWalletAdapter({
-        network: network: WalletAdapterNetwork.Devnet,,
+        network: WalletAdapterNetwork.Devnet,,
       }),
     ],
     []
