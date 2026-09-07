@@ -9,6 +9,12 @@ type BuildAuthMessageInput = {
   expiresAt: string;
 };
 
+type VerifyAuthSignatureInput = {
+  message: string;
+  signature: number[];
+  publicKey: Uint8Array;
+};
+
 export function buildAuthMessage({
   domain,
   uri,
