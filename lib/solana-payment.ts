@@ -47,12 +47,12 @@ function findBalance(
 }
 
 function amountOf(balance: TokenBalance | undefined) {
-  if (!balance) return 0n;
+  if (!balance) return BigInt(0);
 
   try {
     return BigInt(balance.uiTokenAmount.amount);
   } catch {
-    return 0n;
+    return BigInt(0);
   }
 }
 
@@ -122,8 +122,8 @@ export function extractUsdcPayment({
     amountOf(recipientBefore);
 
   if (
-    senderDecrease <= 0n ||
-    recipientIncrease <= 0n ||
+    senderDecrease <= BigInt(0) ||
+    recipientIncrease <= BigInt(0) ||
     senderDecrease !== recipientIncrease
   ) {
     return null;
