@@ -1,12 +1,23 @@
 import { neon } from "@neondatabase/serverless";
 
-if (!process.env.DATABASE_URL) {
-  throw new Error("DATABASE_URL is not configured");
+let initialized = false;
+
+function getSql() {
+  const databaseUrl = process.env.DATABASE_URL;
+
+  if (!databaseUrl) {
+    throw new Error("DATABASE_URL is not configured");
+  }
+
+  return neon(databaseUrl);
 }
 
-export const sql = neon(process.env.DATABASE_URL);
-
-let initialized = false;
+export function sql(
+  strings: TemplateStringsArray,
+  ...values: unknown[]
+) {
+  return getSql()(strings, ...values);
+}
 
 export async function initializeDatabase() {
   if (initialized) return;
