@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "@solana/wallet-adapter-react-ui/styles.css";
 import "./globals.css";
 import Providers from "./providers";
+import PaymentGate from "../components/payment-gate";
 
 export const metadata: Metadata = {
   title: "CMC CardDex",
@@ -17,7 +18,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Providers>{children}</Providers>
+        <Providers>
+  <PaymentGate>{children}</PaymentGate>
+</Providers>
       </body>
     </html>
   );
