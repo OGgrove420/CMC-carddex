@@ -148,12 +148,12 @@ export default function PaymentGate({
   useEffect(() => {
     setHasAccess(false);
 
-    if (connected && publicKey && signMessage) {
-      authenticate();
-    } else {
-      setStatus("connect a supported Solana wallet");
-    }
-  }, [authenticate, connected, publicKey, signMessage]);
+    setStatus(
+      connected
+        ? "wallet connected. choose an access option"
+        : "connect a supported Solana wallet"
+    );
+  }, [connected, publicKey]);
 
   const payForAccess = useCallback(async () => {
     if (!publicKey || !sendTransaction) {
