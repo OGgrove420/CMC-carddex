@@ -1,5 +1,6 @@
 "use client";
-
+import { WalletAdapterNetwork } from
+  "@solana/wallet-adapter-base";
 import { useMemo } from "react";
 import {
   ConnectionProvider,
@@ -28,7 +29,7 @@ export default function Providers({
     () => [
       new PhantomWalletAdapter(),
       new SolflareWalletAdapter({
-        network: "devnet",
+        network: network: WalletAdapterNetwork.Devnet,,
       }),
     ],
     []
